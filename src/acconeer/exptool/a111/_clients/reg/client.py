@@ -176,11 +176,7 @@ class UARTClient(RegBaseClient):
         super().__init__(**kwargs)
 
         self._streaming_control_val = "uart_streaming"
-
-        if platform.system().lower() in ["windows", "darwin"]:
-            self._link = links.SerialLink(port)
-        else:
-            self._link = links.SerialProcessLink(port)
+        self._link = links.SerialLink(port)
 
     def _connect(self):
         self._link.timeout = self.CONNECT_ROUTINE_TIMEOUT
